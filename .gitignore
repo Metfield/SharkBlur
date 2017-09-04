@@ -9,13 +9,6 @@
 *.userosscache
 *.sln.docstates
 
-*.opendb
-*.opensdf
-*.sdf
-*.cachefile
-*.VC.db
-*.VC.VC.opendb
-
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
@@ -48,6 +41,9 @@ TestResult.xml
 [Dd]ebugPS/
 [Rr]eleasePS/
 dlldata.c
+
+# Benchmark Results
+BenchmarkDotNet.Artifacts/
 
 # .NET Core
 project.lock.json
@@ -120,6 +116,10 @@ _TeamCity*
 # DotCover is a Code Coverage Tool
 *.dotCover
 
+# AxoCover is a Code Coverage Tool
+.axoCover/*
+!.axoCover/settings.json
+
 # Visual Studio code coverage results
 *.coverage
 *.coveragexml
@@ -155,7 +155,7 @@ publish/
 # Publish Web Output
 *.[Pp]ublish.xml
 *.azurePubxml
-# TODO: Comment the next line if you want to checkin your web deploy settings
+# Note: Comment the next line if you want to checkin your web deploy settings,
 # but database connection strings (with potential passwords) will be unencrypted
 *.pubxml
 *.publishproj
@@ -190,6 +190,7 @@ AppPackages/
 BundleArtifacts/
 Package.StoreAssociation.xml
 _pkginfo.txt
+*.appx
 
 # Visual Studio cache files
 # files ending in .cache can be ignored
@@ -284,6 +285,9 @@ __pycache__/
 # Cake - Uncomment if you are using it
 # tools/**
 # !tools/packages.config
+
+# Tabs Studio
+*.tss
 
 # Telerik's JustMock configuration file
 *.jmconfig
