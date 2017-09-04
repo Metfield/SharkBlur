@@ -1,11 +1,14 @@
-struct TGAImage
+namespace TGA
 {
-	char header[18];
+	struct TGAImage
+	{
+		char header[18];
 
-	int width;
-	int height;
-	int pixelDepth;
+		int width;
+		int height;
+		int pixelDepth;
 
-	int bufferSize;
-	char *buffer;
-};
+		int bufferSize;
+		char *buffer;
+	};
+}

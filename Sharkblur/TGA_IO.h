@@ -3,14 +3,16 @@
 #include<fstream>
 #include"TGAImage.h"
 
-class TGA_IO
+namespace TGA
 {
-public:
-	TGAImage *Load(const char *filename);
+	class TGA_IO
+	{
+	public:
+		bool Load(const char *filename, TGAImage &tgaImage);
+		bool SaveAs(const char *filename, TGAImage *image);
 
-private:
-
-	// Header size is 18 bytes according to TGA specification (Wikipedia FTW)
-	const int HEADER_SIZE = 18;
-
-};
+	private:
+		// Header size is 18 bytes according to TGA specification (Wikipedia FTW)
+		const int HEADER_SIZE = 18;
+	};
+}
