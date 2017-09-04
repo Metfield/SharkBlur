@@ -1,0 +1,7 @@
+﻿  TGA_IO.cpp
+  TGAImage.cpp
+  Sharktest.cpp
+  Generating Code...
+c:\users\taich\documents\visual studio 2015\projects\sharkblur\sharkblur\tga_io.cpp(20): warning C4715: 'TGA_IO::Load': not all control paths return a value
+  Sharkblur.vcxproj -> C:\Users\taich\Documents\Visual Studio 2015\Projects\Sharkblur\Debug\Sharkblur.exe
+  Sharkblur.vcxproj -> C:\Users\taich\Documents\Visual Studio 2015\Projects\Sharkblur\Debug\Sharkblur.pdb (Full PDB)
