@@ -13,12 +13,20 @@ int main(int argc, char **argv)
 	if (!(appParams = ValidateParameters(argc, argv)))
 		return -1;
 
+	// Create TGA reader/writer object
 	// No need to use dynamic storage duration due to program size
-	TGA_IO sourceImage;
-	
+	TGA_IO tga_IO;
+
+	// Holds source image info
+	TGAImage *sourceImage;
+
 	// Load source image
-	if(!sourceImage.Load(appParams->sourceFilename))
+	if(!(sourceImage = tga_IO.Load(appParams->sourceFilename)))
 		return -1;
+
+	// Blur it!!
+
+	// Save new blurred image
 
 	return 0;
 }
