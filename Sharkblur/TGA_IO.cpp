@@ -3,6 +3,7 @@
 
 #include <exception>
 #include <iostream>
+#include <vector>
 
 namespace TGA
 {
@@ -39,8 +40,20 @@ namespace TGA
 
 			// Calculate buffer size, allocate memory and read it 
 			tgaImage.bufferSize = tgaImage.width * tgaImage.height * (tgaImage.pixelDepth / 8);
-			tgaImage.buffer = new char[tgaImage.bufferSize];
-			file.read(tgaImage.buffer, tgaImage.bufferSize);
+			//tgaImage.buffer = new unsigned char[tgaImage.bufferSize];
+			
+			// Check if data is run-length encoded 
+			// Only support true-color RLE
+			if ((int)imageHeader[2] == 10)
+			{
+				// Decompress RLE data
+				Decompress(file, tgaImage, tgaImage.pixelDepth == 32);
+			}
+			else
+			{
+				tgaImage.buffer = new unsigned char[tgaImage.bufferSize];
+				file.read((char *)tgaImage.buffer, tgaImage.bufferSize);
+			}
 
 			// Close file
 			file.close();
@@ -55,18 +68,21 @@ namespace TGA
 		return true;
 	}
 
-	bool TGA_IO::SaveAs(const char * filename, TGAImage *image)
+	bool TGA_IO::SaveAs(const char *filename, TGAImage *image)
 	{
 		try
 		{
 			// Open new binary stream 
 			std::ofstream file(filename, std::ofstream::binary);
 
-			// Write the original header to the file (blurring didn't change this)
+			// This TGA file is now uncompressed, write this on the third byte of the header.
+			// 2 is the code for uncompressed true-color image
+			image->header[2] = 2;
 			file.write(image->header, HEADER_SIZE);
 
 			// Write actual pixel information
-			file.write(image->buffer, image->bufferSize);
+			//file.write((char*)image->vecBuffer.data(), image->vecBuffer.size());
+			file.write((char*)image->buffer, image->bufferSize);
 
 			// Close file
 			file.close();
@@ -79,5 +95,99 @@ namespace TGA
 
 		// Everything is cool
 		return true;
+	}
+
+	void TGA_IO::Decompress(std::ifstream &file, TGAImage &tgaImage, bool hasAlphaChannel)
+	{
+		// Number of pixels to read in a run
+		int runLength = 0;
+
+		// Ofc these hold color values
+		char R, G, B, A;
+		
+		// RLE control byte
+		char packet;
+
+		// This will hold the uncompressed data
+		// Use vector since it's easy to push bytes
+		std::vector<unsigned char> decompressedBuffer;
+
+		// Decompress!
+		for (int i = 0; i <tgaImage.bufferSize; i++)
+		{
+			// Get RLE control byte
+			file.read(&packet, 1);
+
+			// Check if byte is RLE packet
+			if ((unsigned char)packet & 128)
+			{
+				// Clear 8th bit and add one according to specification
+				// Get number of times that next pixel will be written
+				runLength = (unsigned char)packet - 127;
+
+				// Read pixel that is to be repeated
+				file.read(&B, 1);
+				file.read(&G, 1);
+				file.read(&R, 1);
+
+				// Update buffer index
+				i += 3;
+
+				// Take care of alpha
+				if (hasAlphaChannel)
+				{
+					file.read(&A, 1);
+					i++;
+				}
+
+				// Write run-length to new buffer
+				for (int j = 0; j < runLength; j++)
+				{
+					// Push values
+					decompressedBuffer.push_back((unsigned char)B);
+					decompressedBuffer.push_back((unsigned char)G);
+					decompressedBuffer.push_back((unsigned char)R);
+
+					if (hasAlphaChannel)
+						decompressedBuffer.push_back((unsigned char)A);
+				}
+			}
+			else
+			{
+				// Get number of raw pixels to fetch
+				runLength = (unsigned char)packet + 1;
+
+				// Get runLength-amount of raw pixels 
+				for (int j = 0; j < runLength; j++)
+				{
+					// It's a normal pixel. Just copy the raw values
+					file.read(&B, 1);
+					file.read(&G, 1);
+					file.read(&R, 1);
+
+					// Update buffer index
+					i += 3;
+
+					// Push values
+					decompressedBuffer.push_back((unsigned char)B);
+					decompressedBuffer.push_back((unsigned char)G);
+					decompressedBuffer.push_back((unsigned char)R);
+
+					// Take care of alpha
+					if (hasAlphaChannel)
+					{
+						file.read(&A, 1);
+						i++;
+
+						decompressedBuffer.push_back((unsigned char)A);
+					}
+				}
+			}
+		}
+
+		// Finally copy uncompressed vector to image buffer
+		tgaImage.bufferSize = decompressedBuffer.size();
+		tgaImage.buffer = new unsigned char[tgaImage.bufferSize];
+		memcpy(tgaImage.buffer, decompressedBuffer.data(), tgaImage.bufferSize);
 	}
 }

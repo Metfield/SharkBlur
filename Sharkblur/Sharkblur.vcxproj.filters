@@ -27,12 +27,21 @@
     <ClInclude Include="Sharkblur.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Blur.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Pixel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TGA_IO.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Sharkblur.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Blur.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

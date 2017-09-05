@@ -148,12 +148,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Blur.h" />
     <ClInclude Include="ErrorConstants.h" />
+    <ClInclude Include="Pixel.h" />
     <ClInclude Include="Sharkblur.h" />
     <ClInclude Include="TGAImage.h" />
     <ClInclude Include="TGA_IO.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Blur.cpp" />
     <ClCompile Include="Sharkblur.cpp" />
     <ClCompile Include="TGA_IO.cpp" />
   </ItemGroup>

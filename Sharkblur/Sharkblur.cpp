@@ -1,6 +1,7 @@
 #include "Sharkblur.h"
 #include "ErrorConstants.h"
 #include "TGA_IO.h"
+#include "Blur.h"
 
 #include <iostream>
 
@@ -11,7 +12,7 @@ int main(int argc, char **argv)
 	// Command line arguments
 	Sharkblur::CL_Arguments *appParams;
 
-	cout << endl << "Validating arguments..." << endl;
+	cout << endl << "    Validating arguments..." << endl;
 
 	// Validate CL parameters
 	if (!(appParams = Sharkblur::GetCLArguments(argc, argv)))
@@ -24,24 +25,24 @@ int main(int argc, char **argv)
 	// Holds source image info
 	TGA::TGAImage sourceImage;
 
-	cout << "*Loading " << appParams->sourceFilename << endl;
+	cout << "    Loading " << appParams->sourceFilename << endl;
 
 	// Load source image
 	if (!tga_IO.Load(appParams->sourceFilename, sourceImage))
 		return -1;
 
-	cout << "*Blurring image (factor " << appParams->blurFactor << ")" << endl;
+	cout << "    Blurring image (factor " << appParams->blurFactor << ")" << endl;
 
 	// Blur it!!
+	VisualFX::Blur::Run(sourceImage);
 
-
-	cout << "*Saving to " << appParams->destinationFilename << endl;
+	cout << "    Saving to " << appParams->destinationFilename << endl;
 
 	// Save new blurred image
 	tga_IO.SaveAs(appParams->destinationFilename, &sourceImage);
 
-	cout << endl << "*DONE*" << endl;
-
+	// Success! :D
+	cout << endl << "    *DONE*" << endl;	
 	return 0;
 }
 
@@ -71,7 +72,7 @@ namespace Sharkblur
 		}
 
 		// Output file validation? Nah, let's assume the user knows what he's doin'
-
+		// ...		
 
 		// Check if blur is in the [0, 1] range
 		// let's do a simple check

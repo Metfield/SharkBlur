@@ -1,3 +1,7 @@
+#pragma once
+
+#include <vector>
+
 namespace TGA
 {
 	struct TGAImage
@@ -9,6 +13,6 @@ namespace TGA
 		int pixelDepth;
 
 		int bufferSize;
-		char *buffer;
+		unsigned char *buffer;
 	};
 }
