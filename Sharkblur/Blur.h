@@ -12,7 +12,8 @@ namespace VisualFX
 		static void Run(TGA::TGAImage &rawImage, float factor);
 
 	private:
-		static void HorizontalBlur();
-		static char *PixelAt(char *buffer, int x, int y);
+		static void BGRBlur();
+		static void ABGRBlur();
+		static unsigned char *PixelAt(unsigned char *buffer, int x, int y);
 	};
 }

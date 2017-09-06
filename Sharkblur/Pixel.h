@@ -8,19 +8,14 @@ namespace ColorSpace
 		ABGR
 	};
 
-	template <Type pixelType>
-	struct Pixel;
-	
-	template <>
-	struct Pixel<Type::BGR>
-	{
+	struct BGRPixel
+	{	
 		unsigned char B;
 		unsigned char G;
 		unsigned char R;
 	};
 
-	template <>
-	struct Pixel<Type::ABGR>
+	struct ABGRPixel
 	{
 		unsigned char A;
 		unsigned char B;
