@@ -34,7 +34,7 @@ int main(int argc, char **argv)
 	cout << "    Blurring image (factor " << appParams->blurFactor << ")" << endl;
 
 	// Blur it!!
-	VisualFX::Blur::Run(sourceImage);
+	VisualFX::Blur::Run(sourceImage, appParams->blurFactor);
 
 	cout << "    Saving to " << appParams->destinationFilename << endl;
 

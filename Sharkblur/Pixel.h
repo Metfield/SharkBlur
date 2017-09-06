@@ -1,19 +1,30 @@
 #pragma once
 
-namespace PixelType
+namespace ColorSpace
 {
-	struct RGBPixel
+	enum Type
 	{
-		unsigned char R;
-		unsigned char G;
-		unsigned char B;
+		BGR,
+		ABGR
 	};
 
-	struct RGBAPixel
+	template <Type pixelType>
+	struct Pixel;
+	
+	template <>
+	struct Pixel<Type::BGR>
 	{
-		unsigned char R;
-		unsigned char G;
 		unsigned char B;
+		unsigned char G;
+		unsigned char R;
+	};
+
+	template <>
+	struct Pixel<Type::ABGR>
+	{
 		unsigned char A;
+		unsigned char B;
+		unsigned char G;
+		unsigned char R;
 	};
 }

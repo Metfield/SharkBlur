@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include "Pixel.h"
 
 namespace TGA
 {
@@ -11,6 +12,8 @@ namespace TGA
 		int width;
 		int height;
 		int pixelDepth;
+
+		ColorSpace::Type colorSpaceType;
 
 		int bufferSize;
 		unsigned char *buffer;

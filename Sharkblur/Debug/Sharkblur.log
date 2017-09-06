@@ -1,6 +1,6 @@
-﻿  TGA_IO.cpp
-  Sharkblur.cpp
-  Blur.cpp
-  Generating Code...
+﻿  Blur.cpp
+c:\users\taich\documents\visual studio 2015\projects\sharkblur\sharkblur\blur.cpp(47): warning C4101: 'R': unreferenced local variable
+c:\users\taich\documents\visual studio 2015\projects\sharkblur\sharkblur\blur.cpp(47): warning C4101: 'B': unreferenced local variable
+c:\users\taich\documents\visual studio 2015\projects\sharkblur\sharkblur\blur.cpp(47): warning C4101: 'G': unreferenced local variable
   Sharkblur.vcxproj -> C:\Users\taich\Documents\Visual Studio 2015\Projects\Sharkblur\Debug\Sharkblur.exe
   Sharkblur.vcxproj -> C:\Users\taich\Documents\Visual Studio 2015\Projects\Sharkblur\Debug\Sharkblur.pdb (Full PDB)

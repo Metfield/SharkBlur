@@ -38,10 +38,12 @@ namespace TGA
 			tgaImage.height = (unsigned char)imageHeader[14] | ((__int16)imageHeader[15] << 8);
 			tgaImage.pixelDepth = (unsigned char)imageHeader[16];
 
-			// Calculate buffer size, allocate memory and read it 
-			tgaImage.bufferSize = tgaImage.width * tgaImage.height * (tgaImage.pixelDepth / 8);
-			//tgaImage.buffer = new unsigned char[tgaImage.bufferSize];
+			// Calculate buffer size
+			tgaImage.bufferSize = tgaImage.width * tgaImage.height * (tgaImage.pixelDepth / 8);			
 			
+			// Save colorspace info
+			tgaImage.colorSpaceType = tgaImage.pixelDepth == 32 ? ColorSpace::ABGR : ColorSpace::BGR;
+
 			// Check if data is run-length encoded 
 			// Only support true-color RLE
 			if ((int)imageHeader[2] == 10)
@@ -51,6 +53,8 @@ namespace TGA
 			}
 			else
 			{
+				// Uncompressed data :D
+				// Just allocate and copy
 				tgaImage.buffer = new unsigned char[tgaImage.bufferSize];
 				file.read((char *)tgaImage.buffer, tgaImage.bufferSize);
 			}
