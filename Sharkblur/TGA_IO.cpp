@@ -10,6 +10,8 @@ namespace TGA
 	// Reads file TGA file disk and parses it into TGAImage structure
 	bool TGA_IO::Load(const char * filename, TGAImage &tgaImage)
 	{
+		std::cout << "    Loading " << filename << std::endl;
+
 		try
 		{
 			// Load file into stream
@@ -42,7 +44,7 @@ namespace TGA
 			tgaImage.bufferSize = tgaImage.width * tgaImage.height * (tgaImage.pixelDepth / 8);			
 			
 			// Save colorspace info
-			tgaImage.colorSpaceType = tgaImage.pixelDepth == 32 ? ColorSpace::ABGR : ColorSpace::BGR;
+			tgaImage.colorSpaceType = tgaImage.pixelDepth == 32 ? ColorSpace::BGRA : ColorSpace::BGR;
 
 			// Check if data is run-length encoded 
 			// Only support true-color RLE
@@ -72,8 +74,11 @@ namespace TGA
 		return true;
 	}
 
+	// Save new decompressed image
 	bool TGA_IO::SaveAs(const char *filename, TGAImage *image)
 	{
+		std::cout << "    Saving to " << filename << std::endl;
+
 		try
 		{
 			// Open new binary stream 
@@ -101,8 +106,11 @@ namespace TGA
 		return true;
 	}
 
+	// Decompress RLE TGA file
 	void TGA_IO::Decompress(std::ifstream &file, TGAImage &tgaImage, bool hasAlphaChannel)
 	{
+		std::cout << "    Decompressing TARGA image " << std::endl;
+
 		// Number of pixels to read in a run
 		int runLength = 0;
 

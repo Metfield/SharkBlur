@@ -5,14 +5,10 @@
 
 #include <iostream>
 
-using namespace std;
-
 int main(int argc, char **argv)
 {
 	// Command line arguments
 	Sharkblur::CL_Arguments *appParams;
-
-	cout << endl << "    Validating arguments..." << endl;
 
 	// Validate CL parameters
 	if (!(appParams = Sharkblur::GetCLArguments(argc, argv)))
@@ -25,31 +21,29 @@ int main(int argc, char **argv)
 	// Holds source image info
 	TGA::TGAImage sourceImage;
 
-	cout << "    Loading " << appParams->sourceFilename << endl;
-
 	// Load source image
 	if (!tga_IO.Load(appParams->sourceFilename, sourceImage))
 		return -1;
 
-	cout << "    Blurring image (factor " << appParams->blurFactor << ")" << endl;
-
 	// Blur it!!
 	VisualFX::Blur::Run(sourceImage, appParams->blurFactor);
-
-	cout << "    Saving to " << appParams->destinationFilename << endl;
 
 	// Save new blurred image
 	tga_IO.SaveAs(appParams->destinationFilename, &sourceImage);
 
 	// Success! :D
-	cout << endl << "    *DONE*" << endl;	
+	std::cout << std::endl << "    *DONE*" << std::endl;
 	return 0;
 }
 
 namespace Sharkblur
 {
+	using namespace std;
+
 	CL_Arguments *GetCLArguments(int count, char **args)
 	{
+		cout << endl << "    Validating arguments..." << endl;
+
 		// Check if we didn't receive enough parameters
 		if (count != 4)
 		{

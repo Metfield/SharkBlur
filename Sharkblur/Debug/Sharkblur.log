@@ -1,2 +1,7 @@
-﻿  Sharkblur.vcxproj -> C:\Users\taich\Documents\Visual Studio 2015\Projects\Sharkblur\Debug\Sharkblur.exe
+﻿  Blur.cpp
+c:\users\taich\documents\visual studio 2015\projects\sharkblur\sharkblur\blur.cpp(81): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+c:\users\taich\documents\visual studio 2015\projects\sharkblur\sharkblur\blur.cpp(130): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+c:\users\taich\documents\visual studio 2015\projects\sharkblur\sharkblur\blur.cpp(203): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+c:\users\taich\documents\visual studio 2015\projects\sharkblur\sharkblur\blur.cpp(254): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+  Sharkblur.vcxproj -> C:\Users\taich\Documents\Visual Studio 2015\Projects\Sharkblur\Debug\Sharkblur.exe
   Sharkblur.vcxproj -> C:\Users\taich\Documents\Visual Studio 2015\Projects\Sharkblur\Debug\Sharkblur.pdb (Full PDB)

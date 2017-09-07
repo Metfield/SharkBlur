@@ -5,7 +5,7 @@ namespace ColorSpace
 	enum Type
 	{
 		BGR,
-		ABGR
+		BGRA
 	};
 
 	struct BGRPixel
@@ -15,11 +15,11 @@ namespace ColorSpace
 		unsigned char R;
 	};
 
-	struct ABGRPixel
+	struct BGRAPixel
 	{
-		unsigned char A;
 		unsigned char B;
 		unsigned char G;
 		unsigned char R;
+		unsigned char A;
 	};
 }
