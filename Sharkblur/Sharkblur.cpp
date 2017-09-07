@@ -19,17 +19,17 @@ int main(int argc, char **argv)
 	TGA::TGA_IO tga_IO;
 
 	// Holds source image info
-	TGA::TGAImage sourceImage;
+	TGA::TGAImage image;
 
 	// Load source image
-	if (!tga_IO.Load(appParams->sourceFilename, sourceImage))
+	if (!tga_IO.Load(appParams->sourceFilename, image))
 		return -1;
 
 	// Blur it!!
-	VisualFX::Blur::Run(sourceImage, appParams->blurFactor);
+	VisualFX::Blur::Run(image, appParams->blurFactor);
 
 	// Save new blurred image
-	tga_IO.SaveAs(appParams->destinationFilename, &sourceImage);
+	tga_IO.SaveAs(appParams->destinationFilename, &image);
 
 	// Success! :D
 	std::cout << std::endl << "    *DONE*" << std::endl;
